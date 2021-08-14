@@ -8,9 +8,9 @@
 
 ##### Preparando o ambiente
 
-- [ ] Node + NPM
-- [ ] Yarn
-- [ ] Expo
+- [x] Node + NPM
+- [x] Yarn
+- [x] Expo
 
 ##### Instalando as dependências
 

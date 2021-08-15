@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { View, FlatList, Text } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { View, FlatList } from "react-native";
 import Appointment from "../../components/Appointment";
 import Background from "../../components/Background";
 import ButtonAdd from "../../components/ButtonAdd";
@@ -14,6 +15,8 @@ import { styles } from "./styles";
 const Home: React.FC = () => {
   const [category, setCategory] = useState("");
 
+  const navigation = useNavigation();
+
   function handleCategorySelect(categoryId: string) {
     categoryId === category ? setCategory("") : setCategory(categoryId);
   }
@@ -22,7 +25,7 @@ const Home: React.FC = () => {
     <Background>
       <View style={styles.header}>
         <Profile />
-        <ButtonAdd />
+        <ButtonAdd onPress={() => navigation.navigate("AppointmentCreate")} />
       </View>
 
       <CategorySelect
@@ -36,7 +39,12 @@ const Home: React.FC = () => {
         <FlatList
           data={appointments}
           keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <Appointment data={item} />}
+          renderItem={({ item }) => (
+            <Appointment
+              data={item}
+              onPress={() => navigation.navigate("AppointmentDetails")}
+            />
+          )}
           style={styles.matches}
           showsVerticalScrollIndicator={false}
           ItemSeparatorComponent={() => <ListDivider />}
